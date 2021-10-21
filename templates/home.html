@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>MysqlLink</title>
+    <style>
+        .shadow {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-3 shadow"
+        style="position:absolute;border:1px solid #aaa;padding:20px;width:45vw;float:left;margin-left:4vw;">
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <div class="head">
+                        <h2>MysqlLink</h2>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="usernameAdd"
+                        placeholder="Enter first name(optional)" style="margin-left:3vw;width:200px;">
+                </div>
+                <div class="col-auto">
+                    <div class="form-check form-switch">
+                        <div class="col g-3 align-items-center">
+                            <div class="row-auto">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckChecked" name="userAdd">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Add user...?</label>
+                            </div>
+                            <div class="row-auto">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckChecked2" name="userDelete">
+                                <label class="form-check-label" for="flexSwitchCheckChecked2">Delete user...?</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% include 'message.html' %}
+
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="" class="col-form-label">Password to activate MySQL :</label>
+                </div>
+                <div class="col-auto">
+                    <input type="password" id="" class="form-control" name="sqlPassword"
+                        aria-describedby="passwordHelpInline" placeholder="password to activate MySQL.."
+                        style="width:300px;">
+                </div>
+            </div>
+            <hr>
+            <div class="mb-3 my-2">
+                <label for="exampleFormControlInput1" class="form-label">UserClient</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="username"
+                    placeholder="Enter your name ">
+            </div>
+            <div class="checkbox" style="margin-top:3vh;margin-bottom:3vh;">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="exercise"
+                        value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">Exercise</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="diet" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">Diet</label>
+                </div>
+            </div>
+
+
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="insertAct" role="switch"
+                            id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">want to insert activity...?</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="deleteAct" role="switch"
+                            id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">want to delete activity...?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-auto">
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="1"
+                            placeholder="Enter activity" style="width:200px;"></textarea>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="form-check form-switch my-1">
+                        <input class="form-check-input" type="checkbox" name="updateAct" role="switch"
+                            id="flexSwitchCheckChecked3">
+                        <label class="form-check-label" for="flexSwitchCheckChecked3">update to this
+                            activity...?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="fetchAll" role="switch"
+                    id="flexSwitchCheckChecked">
+                <label class="form-check-label" for="flexSwitchCheckChecked">Fetch all user data...?</label>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input class="btn btn-sm btn-primary" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <div class="container my-3 shadow"
+        style="border:1px solid #aaa;padding:20px;width:45vw;float:right;margin-right:4vw;">
+        <div class="head">
+            <h2>MySQL Data</h2>
+        </div>
+        <hr>
+        {% include 'message.html' %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in rows %}
+                <tr>
+                    {% for i in row %}
+                    <td>{{ i }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                {% for row in allrows %}
+                <tr>
+                    {% for i in row %}
+                    <td>{{ i }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+
+            </tbody>
+            <hr>
+
+    </div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <!-- for dissimisible alert box  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $('.alert').alert()
+        })
+    </script>
+</body>
+
+</html>
